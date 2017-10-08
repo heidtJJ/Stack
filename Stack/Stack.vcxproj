@@ -110,10 +110,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="Test_Driver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EmptyStackException.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

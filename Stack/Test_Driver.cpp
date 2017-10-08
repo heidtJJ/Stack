@@ -1,7 +1,7 @@
 #include<iostream>
 #include"Stack.h"
 
-void pushValToStack(Stack& userStack) {
+void pushValToStack(Stack<int>& userStack) {
 	int userValue = -1;
 	std::cout << "Enter a value to add to the stack: ";
 	std::cin >> userValue;
@@ -24,7 +24,7 @@ const int listOptions() {
 	return userChoice;
 }
 
-void performOperation(const int& userChoice, Stack& stack, bool& quitProgram) {
+void performOperation(const int& userChoice, Stack<int>& stack, bool& quitProgram) {
 	system("CLS");
 	switch (userChoice) {
 	case 1: pushValToStack(stack);
@@ -46,7 +46,7 @@ void performOperation(const int& userChoice, Stack& stack, bool& quitProgram) {
 }
 
 int main() {
-	Stack myStack;
+	Stack<int> myStack;
 	bool quitProgram = false;
 	int userChoice = -1;
 	while (!quitProgram) {
@@ -55,7 +55,5 @@ int main() {
 		performOperation(userChoice, myStack, quitProgram);
 		std::cout << "\n";
 	}
-
-
 	return 0;
 }
