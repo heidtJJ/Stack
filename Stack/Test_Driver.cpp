@@ -7,14 +7,17 @@ void pushValToStack(Stack<int>& userStack) {
 	std::cin >> userValue;
 	userStack.push(userValue);
 }
-
-const int listOptions() {
-	int userChoice = -1;
+void listOptions() {
 	std::cout << "Enter one number to choose one of the following options:\n";
 	std::cout << "1: Push value to stack.\n2: Pop value from stack.\n";
 	std::cout << "3: Show top value of stack.\n4: Show size of stack.\n";
 	std::cout << "5: Show if stack is empty.\n6: List elements of stack.\n";
 	std::cout << "Anything else: End program.\n";
+}
+
+const int getUserChoice() {
+	int userChoice = -1;
+	listOptions();
 	while (!(std::cin >> userChoice))
 	{
 		std::cin.clear();
@@ -50,7 +53,7 @@ int main() {
 	bool quitProgram = false;
 	int userChoice = -1;
 	while (!quitProgram) {
-		userChoice = listOptions();
+		userChoice = getUserChoice();
 		std::cout << "\n";
 		performOperation(userChoice, myStack, quitProgram);
 		std::cout << "\n";
