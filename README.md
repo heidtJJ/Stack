@@ -1,8 +1,9 @@
 # Stack
 An implementation of a stack data type. An interface is also provided to work with the stack.
 
-This implementation is a generic stack. 
+My generic implementation of a stack (LIFO). 
 Operations provided:
+
           push
           pop 
           size
