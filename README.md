@@ -3,7 +3,6 @@ An implementation of a stack data type. An interface is also provided to work wi
 
 This implementation is a generic stack. 
 Operations provided:
-       
           push
           pop 
           size
