@@ -1,6 +1,19 @@
 #ifndef _STACK_H_
 #define _STACK_H_
-#include"EmptyStackException.h"
+
+#include<string>
+
+
+struct EmptyStackException
+{
+public:
+	EmptyStackException() : EmptyStackException("") {};
+	EmptyStackException(std::string message) : message_(message) {};
+	const std::string& getMessage() const { return message_; };
+private:
+	std::string message_;
+};
+
 
 // Stack is a last-in-first-out data structure
 template<class T>
@@ -13,18 +26,60 @@ public:
 	const T& top() const;
 	bool empty() const;
 	const int& size() const;
-	void listElements()const;// prints to std::cout the elements of the stack 
-
+	void listElements() const;// prints to std::cout the elements of the stack 
+	
+	template<class T>
+	friend bool operator==(const Stack<T>& stack1, const Stack<T>& stack2);
+	template<class T>
+	friend bool operator!= (const Stack<T>& stack1, const Stack<T>& stack2);
+	const Stack<T>& operator= (const Stack<T>& stack2);
+	~Stack();
 private:
-
 	struct Node {
 		T data;
 		Node* nextNode;
 	};
+	void free();
 
 	Node* head;
 	int _size;
+
 };
+
+//////////////////////// OPERATORS ////////////////////////////
+template<class T>
+bool operator==(const Stack<T>& stack1, const Stack<T>& stack2){
+	Stack<T>::Node* s1Ptr = stack1.head;
+	Stack<T>::Node* s2Ptr = stack2.head;
+	if (stack1._size != stack2._size) {
+		return false;
+	}
+	else { // stacks are the same size
+		for (int counter = 0; counter < stack1._size; counter++) {
+			if (s1Ptr->data != s2Ptr->data) {
+				return false;
+			}
+			s1Ptr = s1Ptr->nextNode;
+			s2Ptr = s2Ptr->nextNode;
+		}
+		return true;
+	}
+}
+
+template<class T>
+inline bool operator!=(const Stack<T>& stack1, const Stack<T>& stack2){
+	return (!(stack1==stack2));
+}
+
+template<class T>
+const Stack<T>& Stack<T>::operator=(const Stack<T>& stack2) {
+	free();
+	Stack<T>::Node* currPtr = stack2.head;
+	while (currPtr != nullptr) {
+		currPtr = currPtr->nextNode;
+	}
+	return *this;
+}
 
 /////////////////////// CONSTRUCTORS //////////////////////////
 template<class T>
@@ -35,6 +90,7 @@ Stack<T>::Stack(const T& newHeadData) {
 	_size = 1;
 	head = new Node;
 	head->data = newHeadData;
+	head->nextNode = nullptr;
 }
 
 /////////////////////// MUTATORS //////////////////////////
@@ -56,7 +112,7 @@ void Stack<T>::pop() {
 		--_size;
 	}
 	else {
-		std::cout << "Stack is empty. Cannot pop from the stack." << std::endl;
+		throw EmptyStackException("Stack is empty. Cannot pop from the stack.");
 	}
 }
 /////////////////////// ACCESSORS //////////////////////////
@@ -66,7 +122,7 @@ const T& Stack<T>::top() const {
 		return head->data;
 	}
 	else {
-		throw EMPTYSTACKEXCEPTION("Stack is empty.Cannot find top of the stack.");
+		throw EmptyStackException("Stack is empty. Cannot find top of the stack.");
 	}
 }
 
@@ -90,5 +146,19 @@ void Stack<T>::listElements() const {
 		currentNode = currentNode->nextNode;
 	}
 	std::cout << "\n";
+}
+
+/////////////////////// DESTRUCTOR //////////////////////////
+template<class T>
+void Stack<T>::free() {
+	Node* currentNode = head;
+	while (head != nullptr) {
+		pop();
+	}
+}
+
+template<class T>
+Stack<T>::~Stack() {
+	free();
 }
 #endif
