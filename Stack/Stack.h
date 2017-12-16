@@ -3,7 +3,7 @@
 
 #include<string>
 
-
+// thrown when pop or top is used on empty stack
 struct EmptyStackException
 {
 public:
@@ -15,7 +15,6 @@ private:
 };
 
 
-// Stack is a last-in-first-out data structure
 template<class T>
 class Stack {
 public:
