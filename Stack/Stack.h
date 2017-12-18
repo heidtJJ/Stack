@@ -22,7 +22,7 @@ public:
 	Stack(const T& newHeadData);
 	void push(const T& newHeadData);
 	void pop();
-	const T& top() const;
+	inline const T& top() const;
 	bool empty() const;
 	const int& size() const;
 	void listElements() const;// prints to std::cout the elements of the stack 
@@ -116,13 +116,9 @@ void Stack<T>::pop() {
 }
 /////////////////////// ACCESSORS //////////////////////////
 template<class T>
-const T& Stack<T>::top() const {
-	if (head != nullptr) {
-		return head->data;
-	}
-	else {
-		throw EmptyStackException("Stack is empty. Cannot find top of the stack.");
-	}
+inline const T& Stack<T>::top() const {
+	if (head != nullptr) return head->data;
+	else throw EmptyStackException("Stack is empty. Cannot find top of the stack.");
 }
 
 template<class T>

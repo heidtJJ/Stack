@@ -11,7 +11,7 @@ public:
 private:
 	void performOperation(const int& userChoice);
 	const int getUserChoice();
-	void pushValToStack();
+	inline void pushValToStack();
 	void listOptions();
 
 	Stack<std::string> buffer;

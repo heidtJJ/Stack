@@ -1,17 +1,21 @@
 #include "Interface.h"
 #include<iostream>
 
-void Interface::pushValToStack() {
+inline void Interface::pushValToStack() {
 	std::string userValue = "";
 	std::cout << "Give an entry to add to the stack: ";
 	std::cin >> userValue;
 	buffer.push(userValue);
 }
+
 void Interface::listOptions() {
 	std::cout << "Enter one number to choose one of the following options:\n";
-	std::cout << "1: Push value to stack.\n2: Pop value from stack.\n";
-	std::cout << "3: Show top value of stack.\n4: Show size of stack.\n";
-	std::cout << "5: Show if stack is empty.\n6: List elements of stack.\n";
+	std::cout << "1: Push value to stack.\n";
+	std::cout << "2: Pop value from stack.\n";
+	std::cout << "3: Show top value of stack.\n";
+	std::cout << "4: Show size of stack.\n";
+	std::cout << "5: Show if stack is empty.\n";
+	std::cout << "6: List elements of stack.\n";
 	std::cout << "Any other number: End program.\n";
 }
 
@@ -51,7 +55,7 @@ void Interface::performOperation(const int& userChoice) {
 
 
 void Interface::run() {
-	int userChoice = -1;
+	int userChoice;
 	while (!quitProgram) {
 		userChoice = getUserChoice();
 		std::cout << "\n";
