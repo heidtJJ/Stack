@@ -1,5 +1,5 @@
 # Stack
-An implementation of a stack data type. An interface is also provided to work with the stack.
+An implementation of a stack data structure.
 
 My generic implementation of a stack (LIFO). 
 Operations provided:
